@@ -72,6 +72,7 @@ public class GetStudentCoursesAction extends Action {
         StudentCourses data = new StudentCourses(recentlyJoinedCourseId, hasEventualConsistencyMsg,
                 courses, sessionsInfoMap);
 
+
         return new JsonResult(data);
     }
 
@@ -89,8 +90,9 @@ public class GetStudentCoursesAction extends Action {
                 boolean isWaitingToOpen = f.isWaitingToOpen();
                 boolean isPublished = f.isPublished();
                 boolean isSubmitted = getStudentStatusForSession(f);
-
-                returnValue.put(fId, new SessionInfoMap(endTime, isOpened, isWaitingToOpen, isPublished, isSubmitted));
+                if(!isWaitingToOpen) {
+                    returnValue.put(fId, new SessionInfoMap(endTime, isOpened, isWaitingToOpen, isPublished, isSubmitted));
+                }
             }
         }
         return returnValue;
