@@ -83,6 +83,7 @@ export class StudentHomePageComponent implements OnInit {
   getStudentCourses(persistencecourse: string): void {
     const paramMap: { [key: string]: string } = { persistencecourse };
     this.httpRequestService.get('/student/courses', paramMap).subscribe((resp: StudentCourses) => {
+
       this.recentlyJoinedCourseId = resp.recentlyJoinedCourseId;
       this.hasEventualConsistencyMsg = resp.hasEventualConsistencyMsg;
       this.courses = resp.courses;
